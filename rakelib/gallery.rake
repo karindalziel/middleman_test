@@ -7,34 +7,31 @@ namespace :gallery do
   require 'active_support/all'
 
   # using tasks to set variables depending on task called
-  task :images do
-    @gallery_type  = "images"
-    @output_file   = "source/_imagelist.html.erb"
-    @image_path    = "source/images/images"
-    @app_image_path = "images/"
+  #task :create, [:gallery_type] => :environment do |t, args|
+  #task :my_task, [:arg1, :arg2] do |t, args|
+  task :images, [:foldername, :arg2] do |t, args|
+    
+    @foldername    =  args.foldername
+    @output_file   = "source/articles/" + args.foldername + ".md"
+    @image_path    = "source/images/" + args.foldername
+    @template_file = "rakelib/gallery.erb"
 
     gallery_create
-
-  end
-
-  task :catalog_cards do
-    @gallery_type  = "catalog_cards"
-    @output_file   = "source/_catalogcardslist.html.erb"
-    @image_path    = "source/catalog_cards/images"
-    @app_image_path = "catalog_cards/"
-
-    gallery_create
-
+    
   end
 
   def gallery_create
     #just want to make sure it is doing something
     puts "hello fine human"
     
-    @template_file = "rakelib/gallery.erb"
+    
 
+puts '-----------'
+    puts @output_file
+    puts @image_path
+    puts '-----------'
       # Totally stole this from http://stackoverflow.com/questions/7813694/how-to-fill-html-file-using-ruby-script
-      File.open('source/_' + @gallery_type + 'list.html.erb', 'w') do |o|
+      File.open(@output_file, 'w') do |o|
         puts "Processing file: #{@template_file}"
         o << ERB.new( IO.read( @template_file ), nil, '>', 'output' ).result( binding )
       end
@@ -50,11 +47,8 @@ namespace :gallery do
 
     # List the exif fields you want outputted.
     @exifs = ['identifier',
-               'description',
-               'creator',
-               'keyword',
-               'date',
-               'source']
+               
+               'keywords']
 
     def exif_field_builder(photo, property)
     # public_send() allows me to call the variable property rather than the exif tag property

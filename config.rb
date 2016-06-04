@@ -24,7 +24,7 @@ page '/*.txt', layout: false
 
 activate :blog do |blog|
 
-  blog.sources = "{year}-{month}-{day}"
+  blog.sources = "articles/{year}-{month}-{day}"
   blog.default_extension = ".md"
   # This will add a prefix to all links, template references and source paths
   # blog.prefix = "blog"
