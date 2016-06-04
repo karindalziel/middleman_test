@@ -1,0 +1,53 @@
+<% find_images.each_slice(3) do |slice| %>
+ 
+  <div class="row">
+
+  <% slice.each do |image| %>
+
+   <% photo = MiniExiftool.new(image, iptc_encoding: 'UTF8')
+       filename = File.basename image 
+       exiftime = photo.date
+       if exiftime.present?
+         timeobject = DateTime.strptime(exiftime, '%Y:%m:%d')
+         prettytime = timeobject.strftime("%B %d, %Y")
+        else
+          prettytime = 'No Date'
+        end
+    %>
+
+    <div class="col-md-4">
+      <a href="<%= @app_image_path %>images/<%= filename %>" 
+        data-toggle="lightbox" 
+        data-gallery="hopewell" 
+        data-footer="<%= photo.description %>" 
+        data-title="<%=prettytime%>">
+        <img src="<%= @app_image_path %>images_thumbnails/<%= filename %>"/>
+      </a>
+
+      <ul>
+      <li>
+        Filename: <%= filename %>
+      </li>
+      <% if @gallery_type == 'images' %>
+        <% @exifs.each do |exif_field| %>
+          <li>
+            <%= exif_field_builder(photo, exif_field) %>
+          </li>
+        <% end %>
+      <% end %>
+
+      <% if @gallery_type == 'catalog_cards' %>
+        <li>
+          <a href="<%= @app_image_path %>pdf/<%= filename.gsub('.jpg','') %>.pdf">
+            Link to PDF: <%= filename.gsub('.jpg','') %>.pdf
+          </a>
+        </li>
+      <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+</div>
+
+<% end %>
+
