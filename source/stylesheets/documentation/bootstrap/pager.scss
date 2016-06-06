@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+/*doc
+---
+title: "Pager"
+name: pager-a
+category: "Bootstrap Navigation"
+---
+
+```html_example
+<ul class="pager">
+  <li><a href="#">Previous</a></li>
+  <li><a href="#">Next</a></li>
+</ul>
+```
+*/
+
+
+
+/*doc
+---
+title: "Pager: Align links"
+name: pager-b
+category: "Bootstrap Navigation"
+---
+
+```html_example
+<ul class="pager">
+  <li class="previous"><a href="#">&larr; Older</a></li>
+  <li class="next"><a href="#">Newer &rarr;</a></li>
+</ul>
+```
+*/
+
+
+
+/*doc
+---
+title: "Pager: Disabled"
+name: pager-c
+category: "Bootstrap Navigation"
+---
+
+```html_example
+<ul class="pager">
+  <li class="previous disabled"><a href="#">&larr; Older</a></li>
+  <li class="next"><a href="#">Newer &rarr;</a></li>
+</ul>
+```
+*/

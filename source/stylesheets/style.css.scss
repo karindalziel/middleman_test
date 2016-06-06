@@ -1,0 +1,103 @@
+/**************************************/
+/* Bootstrap IMPORT */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+/* /Bootstrap IMPORT */
+/**************************************/
+
+
+/* For Styleguide only */
+ .exampleOutput > div.row > div {
+   border: solid 1px #aaa;
+   background-color: $gray-lighter;
+   font-size: 90%
+ }
+ /* End Styleguide Only */
+
+
+/*doc
+---
+title: "Blockquote Fancy"
+name: blockquote-a
+category: index
+---
+
+Mimics the look of the default bootstrap blockquote.
+
+```html_example
+<blockquote class="blockquote-fancy">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ita separantur, ut disiuncta sint, quo nihil potest esse perversius. An est aliquid, quod te sua sponte delectet? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; Re mihi non aeque satisfacit, et quidem locis pluribus.
+  </p>
+  <footer>
+    Eddard Stark, lord of Winterfel
+  </footer>
+</blockquote>
+```
+*/
+
+.blockquote-fancy {
+	border-left: 5px solid $blockquote-border-color;
+	font-size: $font-size-base * 1.25;
+}
+
+/*doc
+---
+title: "Blockquote Fancy Reverse"
+name: blockquote-b
+category: index
+---
+
+```html_example
+<blockquote class="blockquote-fancy blockquote-reverse">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ita separantur, ut disiuncta sint, quo nihil potest esse perversius. An est aliquid, quod te sua sponte delectet? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; Re mihi non aeque satisfacit, et quidem locis pluribus.
+  </p>
+  <footer>
+    Eddard Stark, lord of Winterfel
+  </footer>
+</blockquote>
+```
+*/
+
+.blockquote-fancy.blockquote-reverse {
+    border-left: none;
+	border-right: 5px solid $blockquote-border-color;
+	font-size: $font-size-base * 1.25;
+}
+
+/* Example Style Doc */
+
+/*doc
+---
+title: Example Style Doc
+name: example
+category: index
+---
+
+```html_example
+<div class="example">This is an example</div>
+```
+*/
+
+
+/* This is for the color reference page in the style documentation */
+.color-gray-darker {background-color: $gray-darker}
+
+.color-gray-dark {background-color: $gray-dark}
+
+.color-gray {background-color: $gray}
+
+.color-gray-light {background-color: $gray-light}
+
+.color-gray-lighter {background-color: $gray-lighter}
+
+.color-brand-primary {background-color: $brand-primary}
+
+.color-brand-success {background-color: $brand-success}
+
+.color-brand-info {background-color: $brand-info}
+
+.color-brand-warming {background-color: $brand-warning}
+
+.color-brand-danger {background-color: $brand-danger}

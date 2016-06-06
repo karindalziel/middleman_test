@@ -7,7 +7,7 @@ tags: test, testing, test
 ---
 
 
-
+<h3>zzz</h3>
 <% find_images.each_slice(3) do |slice| %>
  
   <div class="row">
@@ -26,12 +26,14 @@ tags: test, testing, test
     %>
 
     <div class="col-md-4">
-      <a href="images/<%=@foldername%>/<%= filename %>" 
+     
+
+      <a href="/images/<%=@foldername%>/<%= filename %>" 
         data-toggle="lightbox" 
         data-gallery="hopewell" 
         data-footer="<%= photo.description %>" 
         data-title="<%=prettytime%>">
-        <img style="width:200px" src="images/<%=@foldername%>/<%= filename %>"/>
+        <img style="width:200px" src="/images/<%=@foldername%>/<%= filename %>"/>
       </a>
 
       <ul>

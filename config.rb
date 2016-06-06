@@ -1,60 +1,163 @@
-###
-# Page options, layouts, aliases and proxies
-###
 
-# Per-page layout changes:
-#
-# With no layout
+########################
+# Site setting
+########################
+#Time.zone = "Tokyo"
+set :encoding, 'utf-8'
+
+#set :site_url,              'http://example.com'
+set :site_name,             'Example Site Name'
+set :site_title,            'Example Site'
+set :site_subtitle,         'Example Site Sub Title'
+set :site_description,      'Example Site Description.'
+set :site_keywords,         'site keywords, hogehoge, fugafuga'
+set :site_author,           'Author Name'         'Author Name'
+
+########################
+# File Type rules
+########################
+
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 
-# With alternative layout
-# page "/path/to/file.html", layout: :otherlayout
+########################
+# Path setting
+########################
+#set :http_prefix,      '/'
+#set :relative_links,   false
+#set :strip_index_file, true
+#set :trailing_slash,   true
+set :relative_links, true
+activate :relative_assets
 
-# Proxy pages (http://middlemanapp.com/basics/dynamic-pages/)
-# proxy "/this-page-has-no-template.html", "/template-file.html", locals: {
-#  which_fake_page: "Rendering a fake page with a local variable" }
+########################
+# Directory setting
+########################
+set :source,       'source'
+set :build_dir,    'build'
+# set :data_dir,     'data'
 
-###
-# Helpers
-###
+set :layouts_dir,  'layouts'
+# set :partials_dir, 'partials'
+# set :helpers_dir,  'helpers'
 
+# assets helper
+# set :css_dir,      'assets/css'
+# set :js_dir,       'assets/js'
+# set :fonts_dir,    'assets/fonts'
+# set :images_dir,   'assets/images'
 
+# etc
+set :index_file,   'index.html'
+set :layout,       'layout'
 
-activate :blog do |blog|
+########################
+# Markdown setting
+########################
+# set :markdown_engine, :kramdown
 
-  blog.sources = "articles/{year}-{month}-{day}"
-  blog.default_extension = ".md"
+########################
+# Sass/SCSS setting
+########################
+
+# configure :development do
+#   set :sass, {
+#     :style => :nested
+#   }
+#   set :sass_assets_paths, []
+# end
+
+# configure :build do
+#   set :sass, {
+#     :style => :compressed
+#   }
+#   set :sass_assets_paths, []
+# end
+
+########################
+# Blog setting
+########################
+
+# gallery blog
+
+activate :blog do |config|
   # This will add a prefix to all links, template references and source paths
-  # blog.prefix = "blog"
+  config.name   = "gallery"
+  config.prefix = "gallery"
 
-  # blog.permalink = "{year}/{month}/{day}/{title}.html"
   # Matcher for blog source files
-  # blog.sources = "{year}-{month}-{day}-{title}.html"
-  # blog.taglink = "tags/{tag}.html"
-  # blog.layout = "layout"
-  # blog.summary_separator = /(READMORE)/
-  # blog.summary_length = 250
-  # blog.year_link = "{year}.html"
-  # blog.month_link = "{year}/{month}.html"
-  # blog.day_link = "{year}/{month}/{day}.html"
-  # blog.default_extension = ".markdown"
+  config.sources = "articles/{year}-{month}-{day}.html"
 
-  blog.tag_template = "tag.html"
-  blog.calendar_template = "calendar.html"
+  # Dist articles
+  # config.permalink = "{year}/{month}/{day}/{title}.html"
+  # config.summary_separator = /(READMORE)/
+  # config.summary_length    = 250
+  # config.taglink           = "tags/{tag}.html"
+  # config.year_link         = "{year}.html"
+  # config.month_link        = "{year}/{month}.html"
+  # config.day_link          = "{year}/{month}/{day}.html"
+  # config.default_extension = ".markdown"
+
+  # Layout and Template
+  config.layout            = "post"
+  config.tag_template      = config.prefix + "/tag.html"
+  config.calendar_template = config.prefix + "/calendar.html"
 
   # Enable pagination
-  # blog.paginate = true
-  # blog.per_page = 10
-  # blog.page_link = "page/{num}"
+  config.paginate = true
+  # config.per_page = 3
+  # config.page_link = "page/{num}"
+end
+
+#images blog
+
+activate :blog do |config|
+  # This will add a prefix to all links, template references and source paths
+  config.name   = "images"
+  config.prefix = "images"
+
+  # Matcher for blog source files
+  config.sources = "articles/{year}-{month}-{day}-{title}.html"
+
+  # Dist articles
+  # config.permalink = "{year}/{month}/{day}/{title}.html"
+  # config.summary_separator = /(READMORE)/
+  # config.summary_length    = 250
+  # config.taglink           = "tags/{tag}.html"
+  # config.year_link         = "{year}.html"
+  # config.month_link        = "{year}/{month}.html"
+  # config.day_link          = "{year}/{month}/{day}.html"
+  # config.default_extension = ".markdown"
+
+  # Layout and Template
+  config.layout            = "post"
+  config.tag_template      = config.prefix + "/tag.html"
+  config.calendar_template = config.prefix + "/calendar.html"
+
+  # Enable pagination
+  config.paginate = true
+  # config.per_page = 3
+  # config.page_link = "page/{num}"
 end
 
 page "/feed.xml", layout: false
-# Reload the browser automatically whenever files change
+
+########################
+# Live Reload setting
+########################
+
 # configure :development do
 #   activate :livereload
 # end
+
+
+########################
+# Helper
+########################
+
+# 自動でimgタグのwidthやheightを指定する
+# activate :automatic_image_sizes
 
 # Methods defined in the helpers block are available in templates
 # helpers do
@@ -63,7 +166,27 @@ page "/feed.xml", layout: false
 #   end
 # end
 
+########################
+# Activate plugins
+########################
+configure :build do
+  # activate :minify_css
+  # activate :minify_javascript
+  # activate :minify_html
+
+  # Enable cache buster
+  # activate :asset_hash do |options|
+  #   options.ignore = [/^assets\/images\/teaser\/eyecatch\.jpg/, /^assets\/images\/eyecatch\.jpg/]
+  # end
+
+  # Use relative URLs
+  # activate :relative_assets
+end
+
+########################
 # Build-specific configuration
+########################
+
 configure :build do
   # Minify CSS on build
   # activate :minify_css

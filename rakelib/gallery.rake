@@ -12,7 +12,7 @@ namespace :gallery do
   task :images, [:foldername, :arg2] do |t, args|
     
     @foldername    =  args.foldername
-    @output_file   = "source/articles/" + args.foldername + ".md"
+    @output_file   = "source/articles/" + args.foldername + ".html.md"
     @image_path    = "source/images/" + args.foldername
     @template_file = "rakelib/gallery.erb"
 
