@@ -1,3 +1,8 @@
+# Resources
+
+- After some trial and error, I hit upon this multiple blog starter and switched to using it. https://github.com/nukos/multiple.middleman-blog.skeleton
+
+
 # middleman_test
 This is a test of middleman + a few rake tasks. When/if I get it working I'll start a new repo for the finished product. 
 
@@ -9,7 +14,6 @@ rake gallery:images['FOLDERNAME']
 
 #TODO
 
-- FIGURE OUT WHY BLOG PAGES AREN'T RENDERING AAARRRGHHHH
 
 - Create two blogs: one for galleries, one for individual photos
 	- change script to write .md files to both blogs 

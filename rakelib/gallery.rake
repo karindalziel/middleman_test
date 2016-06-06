@@ -12,11 +12,14 @@ namespace :gallery do
   task :images, [:foldername, :arg2] do |t, args|
     
     @foldername    =  args.foldername
-    @output_file   = "source/articles/" + args.foldername + ".html.md"
-    @image_path    = "source/images/" + args.foldername
-    @template_file = "rakelib/gallery.erb"
+    @output_file_gallery   = "source/gallery/articles/" + args.foldername + ".html.md"
+    @output_file_image   = "source/images/articles/" + args.foldername + ""
+    @image_path    = "source/files/" + args.foldername
+    @template_file_gallery = "rakelib/gallery.erb"
+    @template_file_image = "rakelib/image.erb"
 
     gallery_create
+    image_page_creator
     
   end
 
@@ -24,16 +27,13 @@ namespace :gallery do
     #just want to make sure it is doing something
     puts "hello fine human"
     
-    
-
-puts '-----------'
-    puts @output_file
-    puts @image_path
+    puts '-----------'
+    puts 'Creating Gallery' + @output_file_gallery
     puts '-----------'
       # Totally stole this from http://stackoverflow.com/questions/7813694/how-to-fill-html-file-using-ruby-script
-      File.open(@output_file, 'w') do |o|
-        puts "Processing file: #{@template_file}"
-        o << ERB.new( IO.read( @template_file ), nil, '>', 'output' ).result( binding )
+      File.open(@output_file_gallery, 'w') do |o|
+        puts "Processing file: #{@template_file_gallery}"
+        o << ERB.new( IO.read( @template_file_gallery ), nil, '>', 'output' ).result( binding )
       end
 
     end
@@ -75,5 +75,32 @@ puts '-----------'
           end
 
         end
+
+    def image_page_creator
+
+      puts 'hi'
+
+        find_images.each do |image| 
+
+          photo = MiniExiftool.new(image, iptc_encoding: 'UTF8')
+           filename = File.basename image 
+           exiftime = photo.date
+           if exiftime.present?
+             timeobject = DateTime.strptime(exiftime, '%Y:%m:%d')
+             prettytime = timeobject.strftime("%B %d, %Y")
+            else
+              prettytime = 'No Date'
+            end
+
+            puts filename
+
+            File.open(@output_file_image + '.html.md', 'w') do |o|
+              puts "Processing file: #{@template_file_image}"
+              o << ERB.new( IO.read( @template_file_image), nil, '>', 'output' ).result( binding )
+            end
+
+        end
+ 
+    end
 
   end

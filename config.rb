@@ -1,86 +1,88 @@
-
 ########################
+#
 # Site setting
+#
 ########################
-#Time.zone = "Tokyo"
+Time.zone = "Tokyo"
 set :encoding, 'utf-8'
 
-#set :site_url,              'http://example.com'
+set :site_url,              'http://example.com'
 set :site_name,             'Example Site Name'
 set :site_title,            'Example Site'
 set :site_subtitle,         'Example Site Sub Title'
 set :site_description,      'Example Site Description.'
 set :site_keywords,         'site keywords, hogehoge, fugafuga'
-set :site_author,           'Author Name'         'Author Name'
+set :site_author,           'Author Name'
+
 
 ########################
-# File Type rules
-########################
-
-page '/*.xml', layout: false
-page '/*.json', layout: false
-page '/*.txt', layout: false
-
-########################
+#
 # Path setting
+#
 ########################
-#set :http_prefix,      '/'
-#set :relative_links,   false
-#set :strip_index_file, true
-#set :trailing_slash,   true
-set :relative_links, true
-activate :relative_assets
+set :http_prefix,      '/'
+set :relative_links,   false
+set :strip_index_file, true
+set :trailing_slash,   true
+
 
 ########################
+#
 # Directory setting
+#
 ########################
 set :source,       'source'
 set :build_dir,    'build'
-# set :data_dir,     'data'
+set :data_dir,     'data'
 
 set :layouts_dir,  'layouts'
-# set :partials_dir, 'partials'
-# set :helpers_dir,  'helpers'
+set :partials_dir, 'partials'
+set :helpers_dir,  'helpers'
 
 # assets helper
-# set :css_dir,      'assets/css'
-# set :js_dir,       'assets/js'
-# set :fonts_dir,    'assets/fonts'
-# set :images_dir,   'assets/images'
+set :css_dir,      'assets/css'
+set :js_dir,       'assets/js'
+set :fonts_dir,    'assets/fonts'
+set :images_dir,   'assets/images'
 
 # etc
 set :index_file,   'index.html'
 set :layout,       'layout'
 
+
 ########################
+#
 # Markdown setting
+#
 ########################
-# set :markdown_engine, :kramdown
+set :markdown_engine, :kramdown
+
 
 ########################
+#
 # Sass/SCSS setting
+#
 ########################
+configure :development do
+  set :sass, {
+    :style => :nested
+  }
+  set :sass_assets_paths, []
+end
 
-# configure :development do
-#   set :sass, {
-#     :style => :nested
-#   }
-#   set :sass_assets_paths, []
-# end
+configure :build do
+  set :sass, {
+    :style => :compressed
+  }
+  set :sass_assets_paths, []
+end
 
-# configure :build do
-#   set :sass, {
-#     :style => :compressed
-#   }
-#   set :sass_assets_paths, []
-# end
 
 ########################
+#
 # Blog setting
+#
 ########################
-
-# gallery blog
-
 activate :blog do |config|
   # This will add a prefix to all links, template references and source paths
   config.name   = "gallery"
@@ -88,6 +90,7 @@ activate :blog do |config|
 
   # Matcher for blog source files
   config.sources = "articles/{year}-{month}-{day}.html"
+  #config.sources = "articles/{year}-{month}-{day}-{title}.html"
 
   # Dist articles
   # config.permalink = "{year}/{month}/{day}/{title}.html"
@@ -109,8 +112,6 @@ activate :blog do |config|
   # config.per_page = 3
   # config.page_link = "page/{num}"
 end
-
-#images blog
 
 activate :blog do |config|
   # This will add a prefix to all links, template references and source paths
@@ -143,17 +144,21 @@ end
 
 page "/feed.xml", layout: false
 
+
 ########################
+#
 # Live Reload setting
+#
 ########################
-
-# configure :development do
-#   activate :livereload
-# end
+configure :development do
+  activate :livereload
+end
 
 
 ########################
+#
 # Helper
+#
 ########################
 
 # 自動でimgタグのwidthやheightを指定する
@@ -166,8 +171,11 @@ page "/feed.xml", layout: false
 #   end
 # end
 
+
 ########################
+#
 # Activate plugins
+#
 ########################
 configure :build do
   # activate :minify_css
@@ -183,14 +191,4 @@ configure :build do
   # activate :relative_assets
 end
 
-########################
-# Build-specific configuration
-########################
 
-configure :build do
-  # Minify CSS on build
-  # activate :minify_css
-
-  # Minify Javascript on build
-  # activate :minify_javascript
-end
