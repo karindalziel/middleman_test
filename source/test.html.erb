@@ -1,0 +1,158 @@
+---
+layout: "test"
+title: "My Title"
+my_list:
+  - one
+  - two
+  - three
+---
+
+<h2>Just some Ruby</h2>
+<h4>List using yaml in header</h4>
+<ol>
+  <% current_page.data.my_list.each do |f| %>
+  <li><%= f %></li>
+  <% end %>
+</ol>
+
+<h4>Grabbing content from page</h4>
+<p><%= current_page.data.title %></p>
+
+<ul>
+  <% 5.times do |num| %>
+    <li>Count <%= num %></li>
+  <% end %>
+</ul>
+
+<h2>Links</h2>
+
+<p><%= link_to 'My Site', 'http://mysite.com' %></p>
+
+<p><% link_to 'http://mysite.com' do %>
+  <%= image_tag 'mylogo.png' %>
+<% end %></p>
+
+<p><%= link_to 'About', '/about.html', :relative => true %></p>
+<!-- in config.rb: set :relative_links, true -->
+
+<h4>Links to gallery blog</h4>
+<ul>
+  <% blog("gallery").articles.each do |article| %>
+    <li>
+      <%= link_to article.title, article.path %>
+      <%# Note `article.path` in the second argument %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Links to images blog</h4>
+<ul>
+  <% blog("images").articles.each do |article| %>
+    <li>
+      <%= link_to article.title, article.path %>
+      <%# Note `article.path` in the second argument %>
+    </li>
+  <% end %>
+</ul>
+<hr/>
+
+<h4>Goes through everything and links to it</h4>
+<ul>
+<% sitemap.resources.select.each do |resource|  %>
+  <li>
+<%= link_to resource.path, resource, :relative => true %>
+
+ </li>
+  <% end %>
+
+  </ul>
+<%= sitemap.resources.select{|resource| resource.data.title}.each do |resource| 
+    
+     resource.data.title
+     
+  end %>
+
+
+
+<h4>Find every resource that has a title in the sitemap and link to it</h4>
+<ul>
+  <% sitemap.resources.select{|resource| resource.data.title}.each do |resource| %>
+    <li>
+      <%= link_to resource.data.title, resource, :relative => true %>
+      <%# Note `resource` in the second argument %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Query params or url fragments</h4>
+
+<%= link_to 'My Form', '/form.html', :query => { :foo => 'bar' }, :fragment => 'deep' %>
+
+
+<h4>URL for</h4>
+
+<h4>Find every resource that has a title in the sitemap show the link</h4>
+<ul>
+  <% sitemap.resources.select{|resource| resource.data.title}.each do |resource| %>
+    <li>
+      <%= url_for resource %>
+      <%# Note `resource` in the second argument %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Output helpers</h2>
+
+<p>content_for, capture_html, and concat_content.</p>
+
+<% content_for :test do %>
+  <p>This content_for block (test) has been added</p>
+<% end %>
+
+<% if content_for?(:test2) %>   
+  <p>This content_for block (test) has been added</p>
+  <%else %>
+  <p>content_for block (test) HAS NOT been added</p>
+
+<% end %>
+
+<p>Also supports arguments yielded to the content block<br/>
+I CAN'T GET THIS TO WORK</p>
+
+<p><code>yield_content :head, param1, param2</code></p>
+<p><code>content_for(:head) { |param1, param2| ...content... }</code></p>
+
+<h2>Tag Helpers </h2>
+
+<%= tag :img, :src => "/my_image.png" %>
+
+<% content_tag :p, :class => "stuff" do %>
+  Hello
+<% end %>
+
+<%= input_tag :text, :class => "demo" %>
+
+<%= input_tag :password, :value => "secret", :class => "demo" %>
+
+<p> Skipped a bunch of tag helpers, go back if needed</p>
+
+<h4>escape html</h4>
+<p><code><%= escape_html('<hello>&<goodbye>') %></code></p>
+
+<h4>simple_format</h4>
+<p><code><%= simple_format("hello\nworld") %></code></p>
+
+<h4>pluralize</h4>
+<p><code><%= pluralize(2, 'person') %></code></p>
+
+<h4>word_wrap</h4>
+<p><code><pre><%= word_wrap('Once upon a time', :line_width => 8) %></pre></code></p>
+
+<h4>truncate</h4>
+<p><code><%= truncate("Once upon a time in a world far far away", :length => 12) %></code></p>
+
+<h4>truncate_words</h4>
+<p><code><%= truncate_words("Once upon a time in a world far far away", :length => 4) %></code></p>
+
+<h4>highlight</h4>
+<p><code><%= highlight('Lorem dolor sit', 'dolor') %></code></p>

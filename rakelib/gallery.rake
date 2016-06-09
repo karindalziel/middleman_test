@@ -13,7 +13,8 @@ namespace :gallery do
     
     @foldername    =  args.foldername
     @output_file_gallery   = "source/gallery/articles/" + args.foldername + ".html.md"
-    @output_file_image   = "source/images/articles/" + args.foldername + ""
+    @output_file_image_folder   = "source/images/articles/"
+    @output_file_image = args.foldername
     @image_path    = "source/files/" + args.foldername
     @template_file_gallery = "rakelib/gallery.erb"
     @template_file_image = "rakelib/image.erb"
@@ -94,7 +95,7 @@ namespace :gallery do
 
             puts filename
 
-            File.open(@output_file_image + '.html.md', 'w') do |o|
+            File.open(@output_file_image_folder + @output_file_image + '--' + filename.gsub('.jpg','') + '.html.md', 'w') do |o|
               puts "Processing file: #{@template_file_image}"
               o << ERB.new( IO.read( @template_file_image), nil, '>', 'output' ).result( binding )
             end

@@ -10,20 +10,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%= stylesheet_link_tag :style %>
 <%= javascript_include_tag :all %>
-<%= yield_content :assets %>
 </head>
 <body>
 <hr/>
-<p>nirak.net photos - <%= current_page.data.title %></p>
-<hr/>
+<div style="border: solid red 3px;">
 
 <%= yield %>
 
-
+</div>
 
 <hr/>
 
+<%= yield_content :test %>
 
+<% #yield_content :test_with_params, param1, param2 %>
 
 </body>
 </html>

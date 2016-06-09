@@ -3,8 +3,10 @@
 # Site setting
 #
 ########################
-Time.zone = "Tokyo"
+#Time.zone = "Chicago"
 set :encoding, 'utf-8'
+
+
 
 set :site_url,              'http://example.com'
 set :site_name,             'Example Site Name'
@@ -14,6 +16,24 @@ set :site_description,      'Example Site Description.'
 set :site_keywords,         'site keywords, hogehoge, fugafuga'
 set :site_author,           'Author Name'
 
+# Helpers example
+helpers do
+  def test_zzz
+    return 'yyy'
+  end
+end
+
+#deploy example
+activate :deploy do |deploy|
+  deploy.deploy_method   = :sftp
+  deploy.host            = 'sftp.example.com'
+  deploy.port            = 22
+  deploy.path            = '/srv/www/site'
+  # Optional Settings
+  # deploy.user     = 'tvaughan' # no default
+  # deploy.password = 'secret' # no default
+  #deploy.build_before = true # default: false
+end
 
 ########################
 #
@@ -96,7 +116,7 @@ activate :blog do |config|
   # config.permalink = "{year}/{month}/{day}/{title}.html"
   # config.summary_separator = /(READMORE)/
   # config.summary_length    = 250
-  # config.taglink           = "tags/{tag}.html"
+   config.taglink           = "tags/{tag}.html"
   # config.year_link         = "{year}.html"
   # config.month_link        = "{year}/{month}.html"
   # config.day_link          = "{year}/{month}/{day}.html"
@@ -119,7 +139,7 @@ activate :blog do |config|
   config.prefix = "images"
 
   # Matcher for blog source files
-  config.sources = "articles/{year}-{month}-{day}-{title}.html"
+  config.sources = "articles/{title}.html"
 
   # Dist articles
   # config.permalink = "{year}/{month}/{day}/{title}.html"
